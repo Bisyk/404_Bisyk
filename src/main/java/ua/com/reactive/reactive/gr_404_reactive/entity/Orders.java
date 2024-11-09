@@ -1,22 +1,19 @@
 package ua.com.reactive.reactive.gr_404_reactive.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Order {
 
+    @Id
     private Long id;
-    private Client client;
-    private List<Product> products;
+    private Long clientId;
     private LocalDateTime orderDate;
     private String status;
     private String comment;
@@ -26,3 +23,4 @@ public class Order {
     private String deliveryZip;
     private double totalPrice;
 }
+
