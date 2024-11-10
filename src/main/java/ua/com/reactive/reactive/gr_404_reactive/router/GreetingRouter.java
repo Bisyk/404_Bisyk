@@ -3,10 +3,7 @@ package ua.com.reactive.reactive.gr_404_reactive.router;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.server.RequestPredicates;
-import org.springframework.web.reactive.function.server.RouterFunction;
-import org.springframework.web.reactive.function.server.RouterFunctions;
-import org.springframework.web.reactive.function.server.ServerResponse;
+import org.springframework.web.reactive.function.server.*;
 import ua.com.reactive.reactive.gr_404_reactive.handler.GreetingHandler;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
@@ -14,12 +11,16 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration(proxyBeanMethods = false)
 public class GreetingRouter {
 
+
     @Bean
     public RouterFunction<ServerResponse> route(GreetingHandler greetingHandler) {
 
+        RequestPredicate accept = accept(MediaType.APPLICATION_JSON);
         return RouterFunctions
-                .route(RequestPredicates.GET("/hello").and(accept(MediaType.APPLICATION_JSON)), greetingHandler::hello)
-                .andRoute(RequestPredicates.GET("/"), greetingHandler::home)
-                .andRoute(RequestPredicates.GET("/users"), greetingHandler::getClients);
+
+                .route(RequestPredicates.GET("/"), greetingHandler::hello)
+                .andRoute(RequestPredicates.GET("/users").and(accept), greetingHandler::users)
+                .andRoute(RequestPredicates.GET("/admin"), greetingHandler::admin);
+
     }
 }

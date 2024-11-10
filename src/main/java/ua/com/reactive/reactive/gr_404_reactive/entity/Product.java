@@ -1,16 +1,13 @@
 package ua.com.reactive.reactive.gr_404_reactive.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.Id;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Product {
 
+    @Id
     private Long id;
     private String name;
     private String description;
